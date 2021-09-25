@@ -31,7 +31,7 @@ Storage_Account_url = "https://{Storate_Account_Name}.dfs.core.windows.net/"
 Storage_Account_credential = '{Access_Key}'
 
 DataLake_service = DataLakeServiceClient(account_url = Storage_Account_url,
-                   credential = Storage_Account_credentiall)
+                   credential = Storage_Account_credential)
 
 ```
 
@@ -50,7 +50,7 @@ to create
 
  to load existing file system 
  ```python
-  File_Sistem_Client = datalake_service.get_file_system_client( {File_System_Name} )
+  File_Sistem_Client = DataLake_service.get_file_system_client( {File_System_Name} )
  ```
  > this code will load an existing fileSystem (container) with the name: {File_System_Name}
 
@@ -84,11 +84,71 @@ to deleate file system or Directory just use use
 ```
 
 ##### 1.4 get directory contents
-to get the content of crrent directory just use 
+to get the content of crrent directory just use .get_paths() method
+> .get_paths() return array of objects (PathProperties Class)
+Each object have { name, owner, permissions, last_modifiedm , is_directory, etc..} fields that return data abon it's name
 
-the storaget account name is 
-"http://{storage_account_name}.dfs.core.windows.net"
+```python
+ objjects = Directory_Client.get_paths()
+ 
+ for object in objects:
+     print( object.name )
+```
 
-credential = "access key"
-}{POIUYTRE":LKJHGFDSA?><MNBVCCCCXZ/.,mnbvcxz';lkjhgfdssssssssa][poiuytrewq=-0987654321+_)(*&^%$#@
+##### 2 Upload File
+
+
+to upload file we havemany steps
+1- navigate directory
+2- create target file 
+3- read and upload file
+
+to upload file we have 2 methods 
+1- if the file is text based file (.csv, .tsv, .txt, etc..)
+2- if the file of others types (.pdf, .jpeg, .mp4, .rar, etc..)
+
+####  2.1 upload text based file:
+
+```python
+def upload_TextBased_file():
+    try:
+
+        file_system_client =datalake_service.get_file_system_client( {File_System_Name} )
+
+        directory_client = file_system_client.get_directory_client( "my-directory" )
+        
+        file_client = directory_client.create_file ( "{file_name}.{Extinction}" )
+
+        source_file = open("file",'rb')
+
+        source_file_contents = local_file.read()
+
+        file_client.append_data(data=source_file_contents, offset=0, length=len(file_contents))
+         
+        file_client.flush_data(len(source_file_contents))
+
+    except Exception as e:
+      print(e)
+```
+
+to  uploadany file tybe use this function 
+```python
+def upload_file():
+    try:
+
+        file_system_client =datalake_service.get_file_system_client( {File_System_Name} )
+
+        directory_client = file_system_client.get_directory_client( "my-directory" )
+        
+        file_client = directory_client.create_file ( "{file_name}.{Extinction}" )
+
+        source_file = open("file",'rb')
+
+        source_file_contents = local_file.read()
+
+        file_client.upload_data(source_file_contents, overwrite=True)
+
+    except Exception as e:
+      print(e)
+```
 
