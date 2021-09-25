@@ -9,9 +9,9 @@ pip install azure-storage-file-datalake
 ```
 
 this python file provide important actions with azure Blob storage (DataLAke Gen2)
-here will manage directories (navigation, create, rename, delate)
 
-working with files(upload text file, upload big file)
+* here will manage directories (navigation, create, rename, delate)
+* working with files(upload text file, upload big file)
 
 ## First 
 import libraries
@@ -21,6 +21,9 @@ from azure.storage.filedatalake import DataLakeServiceClient
 from azure.core.exceptions import ResourceExistsError
 ```
 
+
+
+# 1 
 the storaget account name is 
 "http://{storage_account_name}.dfs.core.windows.net"
 
