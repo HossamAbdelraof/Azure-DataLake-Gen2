@@ -68,6 +68,23 @@ we can consider teh directory is child of File System and we can access teh chil
  Directory_Client = Directory_Clien.get_directory_client(" folder3 ")
 ```
 
+##### 1.2 Rename
+
+to rename file system or directory just use .rename_directory() method
+
+```python
+ Directory_Client =  Directory_Clien.rename_directory(new_name= "{New_Name}")
+```
+
+##### 1.3 Delete 
+
+to deleate file system or Directory just use use 
+```python
+ Directory_Client.delete_directory()
+```
+
+##### 1.4 get directory contents
+to get the content of crrent directory just use 
 
 the storaget account name is 
 "http://{storage_account_name}.dfs.core.windows.net"
